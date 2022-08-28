@@ -1,0 +1,6 @@
+build/
+configs/
+db/schema.sql
+README.md
+docker-compose.yml
+Makefile
