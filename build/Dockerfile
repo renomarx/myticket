@@ -12,9 +12,6 @@ COPY go.mod /go/src/app/
 COPY go.sum /go/src/app/
 RUN go mod download
 
-# Because it needs to compile so it's a bit long
-RUN go build "github.com/mattn/go-sqlite3"
-
 COPY . /go/src/app/
 WORKDIR /go/src/app/cmd/myticket
 
