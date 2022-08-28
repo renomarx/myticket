@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS products (
   updated_at TIMESTAMP NOT NULL
 );
 
-CREATE INDEX products_id_idx ON products (id);
+CREATE INDEX products_id_idx ON products (product_id);
 
 -- migrate:down
 DROP TABLE tickets;

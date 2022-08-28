@@ -14,7 +14,8 @@ Total: 16.90
 
 product,product_id,price
 Formule(s) midi,aZde,14.90
-Café,IZ8z,2`)
+Café,IZ8z,2
+`)
 	ticket := model.Ticket{
 		Body: body,
 	}

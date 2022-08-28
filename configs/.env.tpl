@@ -1,5 +1,5 @@
 # Port for Http server serving Rest API
-REST_PORT=":9098"
+HTTP_PORT=":9098"
 
 # DBMATE
 DATABASE_URL="postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable"
