@@ -8,6 +8,7 @@ import (
 	"io"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/renomarx/myticket/pkg/core/model"
 	"github.com/sirupsen/logrus"
@@ -93,8 +94,10 @@ func (parser *TicketParser) parseCSVLine(record []string, order *model.Order) er
 		return fmt.Errorf("Record length < 2, impossible to parse %v", record)
 	}
 	product := model.Product{
-		ID:   strings.TrimSpace(record[1]),
-		Name: strings.TrimSpace(record[0]),
+		ID:        strings.TrimSpace(record[1]),
+		Name:      strings.TrimSpace(record[0]),
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
 	}
 	if len(record) >= 3 {
 		price, err := strconv.ParseFloat(strings.TrimSpace(record[2]), 64)
