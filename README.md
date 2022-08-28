@@ -24,6 +24,10 @@ Then access to:
 ```bash
 curl -v http://localhost:9098/ping
 ```
+- Test webhook:
+```bash
+./scripts/send_ticket.sh
+```
 
 Test
 ----
@@ -40,13 +44,53 @@ Benchmarks
 Using [hey](https://github.com/rakyll/hey)
 
 ```bash
-hey 'http://localhost:9098/ticket' --data 'TODO'
+hey -m POST -D 'scripts/ticket.txt' http://localhost:9098/ticket
 ```
 
 Benchmark on my very sloowwww machine:
 cpu `Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz`
 ```
-# TODO
+Summary:
+  Total:	0.7807 secs
+  Slowest:	0.7164 secs
+  Fastest:	0.0050 secs
+  Average:	0.1598 secs
+  Requests/sec:	256.1792
+
+
+Response time histogram:
+  0.005 [1]	|
+  0.076 [82]	|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  0.147 [41]	|■■■■■■■■■■■■■■■■■■■■
+  0.218 [12]	|■■■■■■
+  0.290 [23]	|■■■■■■■■■■■
+  0.361 [15]	|■■■■■■■
+  0.432 [10]	|■■■■■
+  0.503 [9]	|■■■■
+  0.574 [2]	|■
+  0.645 [3]	|■
+  0.716 [2]	|■
+
+
+Latency distribution:
+  10% in 0.0089 secs
+  25% in 0.0314 secs
+  50% in 0.0949 secs
+  75% in 0.2624 secs
+  90% in 0.3990 secs
+  95% in 0.4953 secs
+  99% in 0.6552 secs
+
+Details (average, fastest, slowest):
+  DNS+dialup:	0.0038 secs, 0.0050 secs, 0.7164 secs
+  DNS-lookup:	0.0029 secs, 0.0000 secs, 0.0369 secs
+  req write:	0.0003 secs, 0.0000 secs, 0.0048 secs
+  resp wait:	0.1548 secs, 0.0048 secs, 0.6853 secs
+  resp read:	0.0001 secs, 0.0000 secs, 0.0002 secs
+
+Status code distribution:
+  [200]	200 responses
+
 
 ```
 
