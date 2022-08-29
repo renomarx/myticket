@@ -25,6 +25,10 @@ func main() {
 	// We could launch multiple workers, but one should be enough
 	go ticketFallback.Run()
 
+	// TODO : add worker to handle again tickets "TO_TREAT"
+
+	// TODO : maybe add worker to purge or archive old tickets "TREATED"
+
 	api.Serve()
 
 }

@@ -115,3 +115,5 @@ prefer not using one (even if it saves some time at the beginning of a project)
 
 - Using [dbmate](https://github.com/amacneil/dbmate), because it's a good tool to handle migrations, especially useful when your company have more than
 one main coding language (like nodejs and go): you can use the same tool in different projects
+
+- On performances: more things could be done to improve performances, but I assume it should be enough for our needs. At scale, we could eventually have many instances of this service running in parallel with a HAProxy in front dispatching requests among the instances. We would however need postgres running on a high-performances machine (because a distributed postrgres would not improve performances, although it could improve safety and resiliency)
