@@ -26,7 +26,7 @@ func NewPostgresDB() *postgresDB {
 }
 
 func (db *postgresDB) CreateTicket(ticket *model.Ticket) error {
-	res, err := db.db.NamedExec(`
+	stmt, err := db.db.PrepareNamed(`
 		INSERT INTO tickets (
 			body,
 			status,
@@ -41,24 +41,20 @@ func (db *postgresDB) CreateTicket(ticket *model.Ticket) error {
 			:created_at,
 			:updated_at
 		) RETURNING id
-	`,
-		ticket)
+	`)
 	if err != nil {
 		logrus.Error(err)
-		model.AppMetrics.IncDatabaseErrors("Error creating ticket")
+		model.AppMetrics.IncDatabaseErrors("Error preparing statement")
 		return err
 	}
-	rowsAffected, err := res.RowsAffected()
+	var id uint
+	err = stmt.Get(&id, ticket)
 	if err != nil {
-		// Should not happen, as postgres supports it
 		logrus.Error(err)
+		model.AppMetrics.IncDatabaseErrors("Error inserting ticket")
 		return err
 	}
-	if rowsAffected == 0 {
-		err = fmt.Errorf("0 ticket created")
-		model.AppMetrics.IncDatabaseErrors(err.Error())
-		return err
-	}
+	ticket.ID = id
 	return nil
 }
 

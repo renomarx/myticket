@@ -44,7 +44,11 @@ func (handler *RawTicketHandler) Handle(ticket *model.Ticket) {
 		ticket.Status = model.TicketStatusError
 		ticket.ErrorDetails = err.Error()
 		handler.TicketRepo.UpdateTicket(ticket)
+		return
 	}
 	// We could save the whole order, for now we only consider products
 	handler.ProductRepo.SaveProducts(order.Products)
+	// Update ticket to status treated
+	ticket.Status = model.TicketStatusTreated
+	handler.TicketRepo.UpdateTicket(ticket)
 }

@@ -11,6 +11,7 @@ const (
 )
 
 type Ticket struct {
+	ID           uint         `db:"id"`
 	Body         []byte       `db:"body"`
 	Status       TicketStatus `db:"status"`
 	ErrorDetails string       `db:"error_details"`
